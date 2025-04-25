@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plaid Flow Screen 5 - Bank Login</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .modal-container {
+      background: white;
+      border-radius: 20px;
+      width: 400px;
+      height: 600px;
+      max-width: 90vw;
+      max-height: 90vh;
+      padding: 32px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 14px;
+      gap: 6px;
+    }
+
+    .logo img {
+      height: 20px;
+    }
+
+    .icon-wrapper {
+      background: #e0f4f1 url("assets/check-bg.png") center/contain no-repeat;
+      border-radius: 50%;
+      height: 64px;
+      width: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 32px auto 16px;
+    }
+
+    .icon-wrapper img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 24px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .checklist {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+
+    .checklist-header {
+      background-color: #005eb8;
+      color: white;
+      font-weight: bold;
+      padding: 12px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-top: 1px solid #eee;
+    }
+
+    .checklist-item:first-child {
+      border-top: none;
+    }
+
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      background: black;
+      color: white;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-right: 12px;
+    }
+
+    .description {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .description a {
+      color: black;
+      text-decoration: underline;
+    }
+
+    .btn {
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 16px;
+      width: calc(100% - 4px);
+      max-width: 100%;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="modal-container">
+    <div class="header">
+      <button onclick="window.history.back()" style="background: none; border: none; font-size: 22px; cursor: pointer;">←</button>
+      <div class="logo">
+        <img src="assets/plaid-logo.png" alt="Plaid logo" />
+        PLAID
+      </div>
+      <button onclick="window.close()" style="background: none; border: none; font-size: 22px; cursor: pointer;">✕</button>
+    </div>
+
+    <div class="icon-wrapper">
+      <img src="assets/bank-logo.png" alt="Bank logo" />
+    </div>
+
+    <div class="title" id="bank-title">Log in at Chase</div>
+    <div class="subtitle" id="bank-subtitle">After logging into Chase, make sure you<br />check all these boxes:</div>
+
+    <div class="checklist">
+      <div class="checklist-header" id="bank-name">CHASE</div>
+      <div class="checklist-item">
+        <div class="checkbox">✓</div>
+        <div>Checking or savings account</div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox">✓</div>
+        <div>Account and routing number</div>
+      </div>
+    </div>
+
+    <div class="description">
+      You'll share contact info, account and balance info, account and routing number, and transactions to help you pay down debt and invest your money.
+      <a href="#">Learn more</a>
+    </div>
+
+    <a href="https://cdn.plaid.com/link/v2/stable/sandbox-oauth-login.html?client_name=LIQUID&redirect_uri=https%3A%2F%2Fcdn.plaid.com%2Flink%2Fv2%2Fstable%2Foauth.html&state=eyJvYXV0aF9zdGF0ZV9pZCI6IjI3ZjNhZGFlLTllMDktNGRjNC1hZGNmLWMxYTRlN2I5YTA0NSIsInVzZV9vYXV0aF9jYWxsYmFjayI6ZmFsc2UsInBsYWlkX2VudiI6InNhbmRib3giLCJyZWRpcmVjdF91cmkiOiJwbGFpZC1saW5rLW9hdXRoOi8vaGFuZG9mZiJ9&country=US" class="btn">Continue to login <span style="font-size: 18px">↗</span></a>
+  </div>
+
+  <script>
+    const bankName = localStorage.getItem("selectedBank") || "Chase";
+    document.getElementById("bank-title").innerText = `Log in at ${bankName}`;
+    document.getElementById("bank-subtitle").innerHTML = `After logging into ${bankName}, make sure you<br />check all these boxes:`;
+    document.getElementById("bank-name").innerText = bankName.toUpperCase();
+  </script>
+</body>
+</html>
