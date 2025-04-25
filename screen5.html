@@ -156,48 +156,58 @@
   </style>
 </head>
 <body>
-  <div class="modal-container">
-    <div class="header">
-      <button onclick="window.history.back()" style="background: none; border: none; font-size: 22px; cursor: pointer;">←</button>
-      <div class="logo">
-        <img src="assets/plaid-logo.png" alt="Plaid logo" />
-        PLAID
-      </div>
-      <button onclick="window.close()" style="background: none; border: none; font-size: 22px; cursor: pointer;">✕</button>
+<div class="modal-container">
+  <div class="header">
+    <button onclick="window.history.back()" style="background: none; border: none; font-size: 22px; cursor: pointer;">←</button>
+    <div class="logo">
+      <img src="assets/plaid-logo.png" alt="Plaid logo" />
+      PLAID
     </div>
-
-    <div class="icon-wrapper">
-      <img src="assets/bank-logo.png" alt="Bank logo" />
-    </div>
-
-    <div class="title" id="bank-title">Log in at Chase</div>
-    <div class="subtitle" id="bank-subtitle">After logging into Chase, make sure you<br />check all these boxes:</div>
-
-    <div class="checklist">
-      <div class="checklist-header" id="bank-name">CHASE</div>
-      <div class="checklist-item">
-        <div class="checkbox">✓</div>
-        <div>Checking or savings account</div>
-      </div>
-      <div class="checklist-item">
-        <div class="checkbox">✓</div>
-        <div>Account and routing number</div>
-      </div>
-    </div>
-
-    <div class="description">
-      You'll share contact info, account and balance info, account and routing number, and transactions to help you pay down debt and invest your money.
-      <a href="#">Learn more</a>
-    </div>
-
-    <a href="https://cdn.plaid.com/link/v2/stable/sandbox-oauth-login.html?client_name=LIQUID&redirect_uri=https%3A%2F%2Fcdn.plaid.com%2Flink%2Fv2%2Fstable%2Foauth.html&state=eyJvYXV0aF9zdGF0ZV9pZCI6IjI3ZjNhZGFlLTllMDktNGRjNC1hZGNmLWMxYTRlN2I5YTA0NSIsInVzZV9vYXV0aF9jYWxsYmFjayI6ZmFsc2UsInBsYWlkX2VudiI6InNhbmRib3giLCJyZWRpcmVjdF91cmkiOiJwbGFpZC1saW5rLW9hdXRoOi8vaGFuZG9mZiJ9&country=US" class="btn">Continue to login <span style="font-size: 18px">↗</span></a>
+    <button onclick="window.close()" style="background: none; border: none; font-size: 22px; cursor: pointer;">✕</button>
   </div>
 
-  <script>
-    const bankName = localStorage.getItem("selectedBank") || "Chase";
-    document.getElementById("bank-title").innerText = `Log in at ${bankName}`;
-    document.getElementById("bank-subtitle").innerHTML = `After logging into ${bankName}, make sure you<br />check all these boxes:`;
-    document.getElementById("bank-name").innerText = bankName.toUpperCase();
-  </script>
+  <div class="icon-wrapper">
+    <img src="assets/bank-logo.png" alt="Bank logo" />
+  </div>
+
+  <div class="title" id="bank-title">Log in at Chase</div>
+  <div class="subtitle" id="bank-subtitle">After logging into Chase, make sure you<br />check all these boxes:</div>
+
+  <div class="checklist">
+    <div class="checklist-header" id="bank-name">CHASE</div>
+    <div class="checklist-item">
+      <div class="checkbox">✓</div>
+      <div>Checking or savings account</div>
+    </div>
+    <div class="checklist-item">
+      <div class="checkbox">✓</div>
+      <div>Account and routing number</div>
+    </div>
+  </div>
+
+  <div class="description">
+    You'll share contact info, account and balance info, account and routing number, and transactions to help you pay down debt and invest your money.
+    <a href="#">Learn more</a>
+  </div>
+
+  <button id="continue-login" class="btn">Continue to login <span style="font-size: 18px">↗</span></button>
+</div>
+
+<script>
+  const bankName = localStorage.getItem("selectedBank") || "Chase";
+  document.getElementById("bank-title").innerText = `Log in at ${bankName}`;
+  document.getElementById("bank-subtitle").innerHTML = `After logging into ${bankName}, make sure you<br />check all these boxes:`;
+  document.getElementById("bank-name").innerText = bankName.toUpperCase();
+
+  document.getElementById("continue-login").addEventListener("click", () => {
+    const url = "https://cdn.plaid.com/link/v2/stable/sandbox-oauth-login.html?client_name=LIQUID&redirect_uri=https%3A%2F%2Fcdn.plaid.com%2Flink%2Fv2%2Fstable%2Foauth.html&state=eyJvYXV0aF9zdGF0ZV9pZCI6IjI3ZjNhZGFlLTllMDktNGRjNC1hZGNmLWMxYTRlN2I5YTA0NSIsInVzZV9vYXV0aF9jYWxsYmFjayI6ZmFsc2UsInBsYWlkX2VudiI6InNhbmRib3giLCJyZWRpcmVjdF91cmkiOiJwbGFpZC1saW5rLW9hdXRoOi8vaGFuZG9mZiJ9&country=US";
+
+    window.open(url, '_blank', 'noopener,noreferrer');
+
+    setTimeout(() => {
+      window.close();
+    }, 500);
+  });
+</script>
 </body>
 </html>
