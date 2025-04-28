@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Save Chase with Plaid</title>
   <style>
+    /* (your CSS stays exactly same) */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
@@ -63,28 +64,6 @@
       height: 64px;
       border-radius: 50%;
       margin: 32px auto 16px;
-    }
-
-    .illustration {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .illustration-inner {
-      width: 96px;
-      height: 96px;
-      background: #e0f4f1;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .illustration-inner img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
     }
 
     .title {
@@ -201,7 +180,7 @@
       <img src="assets/plaid-logo.png" alt="Plaid logo" />
       PLAID
     </div>
-    <button class="close-button" onclick="window.close()">✕</button>
+    <button class="close-button" onclick="handleClose()">✕</button>
   </div>
 
   <div class="avatar"></div>
@@ -227,9 +206,9 @@
         By saving, you agree to Plaid's <a href="#">Terms</a>
       </div>
 
-      <button id="saveButton" class="save-button" disabled>Save</button>
+      <button id="saveButton" class="save-button" disabled onclick="handleClose()">Save</button>
 
-      <a href="#" class="finish-link" onclick="window.close()">Finish without saving</a>
+      <a href="#" class="finish-link" onclick="handleClose()">Finish without saving</a>
     </div>
   </div>
 </div>
@@ -241,6 +220,20 @@
   phoneInput.addEventListener('input', () => {
     saveButton.disabled = phoneInput.value.trim() === '';
   });
+
+  function handleClose() {
+    try {
+      // If parent exists and iframe embedded, postMessage
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ action: 'closeIframe' }, '*');
+      } else {
+        // Else try normal close if opened in new tab
+        window.close();
+      }
+    } catch (e) {
+      window.close();
+    }
+  }
 </script>
 </body>
 </html>
