@@ -200,14 +200,14 @@
   document.getElementById("bank-name").innerText = bankName.toUpperCase();
 
   document.getElementById("continue-login").addEventListener("click", () => {
-    const url = "https://cdn.plaid.com/link/v2/stable/sandbox-oauth-login.html?client_name=LIQUID&redirect_uri=https%3A%2F%2Fcdn.plaid.com%2Flink%2Fv2%2Fstable%2Foauth.html&state=eyJvYXV0aF9zdGF0ZV9pZCI6IjI3ZjNhZGFlLTllMDktNGRjNC1hZGNmLWMxYTRlN2I5YTA0NSIsInVzZV9vYXV0aF9jYWxsYmFjayI6ZmFsc2UsInBsYWlkX2VudiI6InNhbmRib3giLCJyZWRpcmVjdF91cmkiOiJwbGFpZC1saW5rLW9hdXRoOi8vaGFuZG9mZiJ9&country=US";
-
-    window.open(url, '_blank', 'noopener,noreferrer');
-
+    const oauthUrl = "https://cdn.plaid.com/link/v2/stable/sandbox-oauth-login.html?client_name=LIQUID&redirect_uri=https%3A%2F%2Fcdn.plaid.com%2Flink%2Fv2%2Fstable%2Foauth.html&state=eyJvYXV0aF9zdGF0ZV9pZCI6IjI3ZjNhZGFlLTllMDktNGRjNC1hZGNmLWMxYTRlN2I5YTA0NSIsInVzZV9vYXV0aF9jYWxsYmFjayI6ZmFsc2UsInBsYWlkX2VudiI6InNhbmRib3giLCJyZWRpcmVjdF91cmkiOiJwbGFpZC1saW5rLW9hdXRoOi8vaGFuZG9mZiJ9&country=US";
+    window.open(oauthUrl, '_blank', 'noopener,noreferrer');
     setTimeout(() => {
-      window.close();
-    }, 500);
+      window.location.href = "screen6.html";
+    }, 1000);
   });
 </script>
+
+
 </body>
 </html>
