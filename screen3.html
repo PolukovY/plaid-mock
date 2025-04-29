@@ -161,7 +161,7 @@
   <div class="phone-input">
     <img src="https://flagcdn.com/us.svg" alt="US flag" />
     <span>+1</span>
-    <input type="tel" placeholder="Phone" />
+    <input type="tel" id="phone" placeholder="Phone" />
   </div>
 
   <div class="terms">
@@ -171,5 +171,11 @@
   <button class="primary-btn" onclick="window.location.href='screen4.html'">Continue</button>
   <div class="guest" onclick="window.location.href='screen4.html'">Continue as guest</div>
 </div>
+<script>
+  const phoneInput = document.getElementById("phone");
+  phoneInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^\d]/g, "");
+  });
+</script>
 </body>
 </html>
