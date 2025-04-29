@@ -199,7 +199,7 @@
 
     <div class="bank-card-body">
       <div class="input-group">
-        <input type="tel" id="phone" placeholder="+1 Phone" />
+        <input type="tel" id="phone" placeholder="+1 Phone" inputmode="numeric" pattern="\d*" />
       </div>
 
       <div class="terms">
@@ -215,17 +215,21 @@
 
 <script>
   const phoneInput = document.getElementById("phone");
+  const saveButton = document.getElementById("saveButton");
+
   phoneInput.addEventListener("input", function () {
-    this.value = this.value.replace(/[^\d]/g, "");
+    // Force digits only
+    this.value = this.value.replace(/\D/g, "");
+
+    // Enable button if valid length (e.g., 10+ digits for US)
+    saveButton.disabled = this.value.length >= 10 ? false : true;
   });
 
   function handleClose() {
     try {
-      // If parent exists and iframe embedded, postMessage
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ action: 'closeIframe' }, '*');
       } else {
-        // Else try normal close if opened in new tab
         window.close();
       }
     } catch (e) {
@@ -233,5 +237,6 @@
     }
   }
 </script>
+
 </body>
 </html>
