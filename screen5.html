@@ -11,22 +11,32 @@
       background-color: #ffffff;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 16px;
+      box-sizing: border-box;
+      overflow-y: auto; /* Let body scroll if modal overflows */
     }
 
     .modal-container {
       background-color: white;
       border-radius: 20px;
-      width: 400px;
-      height: auto;
-      max-width: 90vw;
+      width: 100%;
+      max-width: 400px;
+      max-height: 100%;
       padding: 32px 24px;
-      position: relative;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
+      overflow-y: auto; /* KEY: allow scrolling */
+    }
+
+    .sticky-footer {
+      position: sticky;
+      bottom: 0;
+      background: white;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      margin-top: auto;
     }
 
     .header {
@@ -190,7 +200,10 @@
     <a href="#">Learn more</a>
   </div>
 
-  <button id="continue-login" class="btn">Continue to login <span style="font-size: 18px">↗</span></button>
+  <div class="sticky-footer">
+    <button id="continue-login" class="btn">Continue to login <span style="font-size: 18px">↗</span></button>
+  </div>
+
 </div>
 
 <script>
