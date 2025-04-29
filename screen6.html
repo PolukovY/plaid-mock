@@ -199,7 +199,7 @@
 
     <div class="bank-card-body">
       <div class="input-group">
-        <input id="phoneInput" type="text" placeholder="+1 Phone" />
+        <input type="tel" id="phone" placeholder="+1 Phone" />
       </div>
 
       <div class="terms">
@@ -214,11 +214,9 @@
 </div>
 
 <script>
-  const phoneInput = document.getElementById('phoneInput');
-  const saveButton = document.getElementById('saveButton');
-
-  phoneInput.addEventListener('input', () => {
-    saveButton.disabled = phoneInput.value.trim() === '';
+  const phoneInput = document.getElementById("phone");
+  phoneInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^\d]/g, "");
   });
 
   function handleClose() {
